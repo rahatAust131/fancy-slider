@@ -64,24 +64,29 @@ const createSlider = () => {
   <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
   `;
 
-  sliderContainer.appendChild(prevNext);
-  document.querySelector('.main').style.display = 'block';
+  sliderContainer.appendChild(prevNext);  
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
-  sliders.forEach(slide => {
-    let item = document.createElement('div')
-    item.className = "slider-item";
-    item.innerHTML = `<img class="w-100"
-    src="${slide}"
-    alt="">`;
-    sliderContainer.appendChild(item)
-  })
-  changeSlide(0);
-  timer = setInterval(function () {
-    slideIndex++;
-    changeSlide(slideIndex);
-  }, duration);
+  const duration = document.getElementById('duration').value;
+  if(duration < 0) {
+    alert('Duration Can Not Be negative!');
+  }
+  else {
+    document.querySelector('.main').style.display = 'block';
+    sliders.forEach(slide => {
+      let item = document.createElement('div');
+      item.className = "slider-item";
+      item.innerHTML = `<img class="w-100"
+      src="${slide}"
+      alt="">`;
+      sliderContainer.appendChild(item);
+    })
+    changeSlide(0);
+    timer = setInterval(function () {
+      slideIndex++;
+      changeSlide(slideIndex);
+    }, duration);
+  }
 }
 
 // change slider index 
