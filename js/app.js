@@ -53,7 +53,7 @@ const selectItem = (event, img) => {
     console.log(sliders);
     console.log(item);
   } else {
-    sliders = sliders.filter(itemSlide => itemSlide.indexOf(img));
+    sliders = sliders.filter(sliderItem => sliderItem.indexOf(img));
     console.log(sliders);
     console.log(item);
   }
@@ -69,7 +69,7 @@ const createSlider = () => {
   }
   const duration = document.getElementById('duration').value || 1000;  
   if(duration < 0) {
-    alert('Please Insert A Positive Duration value')
+    alert('Please Insert A Positive Duration value');
     return;
   }
   // create slider previous next area
@@ -135,12 +135,17 @@ searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
-  getImages(search.value);
+  if(search.value !== "") {
+    getImages(search.value);
+  }
+  else {
+    alert("Please Type Something in the Search Box");
+  }
   sliders.length = 0;
 })
 
 // Create Slider Button Interaction
-sliderBtn.addEventListener('click', function () {
+sliderBtn.addEventListener('click', () => {
   createSlider();  
 })
 
