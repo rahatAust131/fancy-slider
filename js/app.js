@@ -1,3 +1,8 @@
+// <------About Bonus Parts------>
+// 1) Added Count Of Selected Image
+// 2) Added Spinner
+
+// Targeting all necessary classes
 const imagesArea = document.querySelector('.images');
 const gallery = document.querySelector('.gallery');
 const galleryHeader = document.querySelector('.gallery-header');
@@ -8,7 +13,6 @@ const selectedImgCnt = document.getElementById('selected-img');
 
 // selected image 
 let sliders = [];
-
 
 // If this key doesn't work
 // Find the name in the url and go to their website
@@ -46,8 +50,12 @@ const selectItem = (event, img) => {
   
   if (item === -1) {
     sliders.push(img);
+    console.log(sliders);
+    console.log(item);
   } else {
-    sliders.pop(img);
+    sliders = sliders.filter(itemSlide => itemSlide.indexOf(img));
+    console.log(sliders);
+    console.log(item);
   }
   toggleImgCnt();
 }
@@ -59,7 +67,12 @@ const createSlider = () => {
     alert('Select at least 2 image.');
     return;
   }
-  // crate slider previous next area
+  const duration = document.getElementById('duration').value || 1000;  
+  if(duration < 0) {
+    alert('Please Insert A Positive Duration value')
+    return;
+  }
+  // create slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
   prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
@@ -70,12 +83,7 @@ const createSlider = () => {
 
   sliderContainer.appendChild(prevNext);  
   // hide image aria
-  imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value;
-  if(duration < 0) {
-    alert('Invalid/Negative Duration! Try again with a valid duration');
-    return;
-  }
+  imagesArea.style.display = 'none';  
   document.querySelector('.main').style.display = 'block';
   sliders.forEach(slide => {
     let item = document.createElement('div');
@@ -83,13 +91,18 @@ const createSlider = () => {
     item.innerHTML = `<img class="w-100"
     src="${slide}"
     alt="">`;
+    console.log(slide);
     sliderContainer.appendChild(item);
-  })
+  })  
   changeSlide(0);
   timer = setInterval(function () {
     slideIndex++;
     changeSlide(slideIndex);
-  }, duration);
+  }, duration);  
+
+  document.getElementById('duration').value = '';
+  document.getElementById('search').value = '';
+  document.getElementById('selected-img').innerText = '0';
 }
 
 // change slider index 
@@ -99,7 +112,6 @@ const changeItem = index => {
 
 // change slide item
 const changeSlide = (index) => {
-
   const items = document.querySelectorAll('.slider-item');
   if (index < 0) {
     slideIndex = items.length - 1;
@@ -129,10 +141,7 @@ searchBtn.addEventListener('click', function () {
 
 // Create Slider Button Interaction
 sliderBtn.addEventListener('click', function () {
-  createSlider();
-  document.getElementById('duration').value = '';
-  document.getElementById('search').value = '';
-  document.getElementById('selected-img').innerText = '0';
+  createSlider();  
 })
 
 // Enter Key Interaction
@@ -151,6 +160,8 @@ const toggleSpinner = () => {
 
 // Change The Selected Image Count
 const toggleImgCnt = () => {
-  let imgCnt = sliders.length;
-  selectedImgCnt.innerText = imgCnt;  
+  if(sliders.length >= 0) {
+    let imgCnt = sliders.length;
+    selectedImgCnt.innerText = imgCnt;
+  }  
 }
