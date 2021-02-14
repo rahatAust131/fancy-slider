@@ -1,1 +1,1 @@
-# fancy-slider
+# https://rahataust131.github.io/fancy-slider/
