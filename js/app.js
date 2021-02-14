@@ -9,7 +9,7 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
-const selectedImgCnt = document.getElementById('selected-img');
+const selectedImgCnt = document.getElementById('selected-img-cnt');
 
 // selected image 
 let sliders = [];
@@ -73,8 +73,12 @@ const createSlider = () => {
   const prevNext = document.createElement('div');
   prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
   prevNext.innerHTML = ` 
-  <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
-  <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
+    <span class="prev" onclick="changeItem(-1)">
+      <i class="fas fa-chevron-left"></i>
+    </span>
+    <span class="next" onclick="changeItem(1)">
+      <i class="fas fa-chevron-right"></i>
+    </span>
   `;
 
   sliderContainer.appendChild(prevNext);  
@@ -97,7 +101,7 @@ const createSlider = () => {
 
   document.getElementById('duration').value = '';
   document.getElementById('search').value = '';
-  document.getElementById('selected-img').innerText = '0';
+  document.getElementById('selected-img-cnt').innerText = '0';
 }
 
 // change slider index 

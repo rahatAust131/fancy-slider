@@ -1,9 +1,18 @@
+body {
+  background-color: rgba(145, 226, 199, 0.938);  
+}
+
 #sliders {
   height: 400px;
   width: 60%;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
+}
+
+.selected-img-div {
+  border: 2px dashed darkred; 
+  padding: 5px;
 }
 
 .gallery-header {
@@ -41,6 +50,10 @@ img {
   padding: 8px 10px;
   color: #fff;
 }
+.prev:hover, .next:hover {
+  background-color: blue;
+  transition: all .3s ease-in;
+}
 
 .dot {
   background-color: rgb(163, 156, 156);
@@ -49,6 +62,10 @@ img {
   border-radius: 50%;
   cursor: pointer;
   margin: 0 3px;
+}
+.dot:hover {
+  background-color: rgb(0, 60, 255);
+  transition: all .3s ease-in;
 }
 
 .main {
