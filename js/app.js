@@ -49,13 +49,9 @@ const selectItem = (event, img) => {
   let item = sliders.indexOf(img);
   
   if (item === -1) {
-    sliders.push(img);
-    console.log(sliders);
-    console.log(item);
+    sliders.push(img);    
   } else {
-    sliders = sliders.filter(sliderItem => sliderItem.indexOf(img));
-    console.log(sliders);
-    console.log(item);
+    sliders = sliders.filter(sliderItem => sliderItem.indexOf(img));    
   }
   toggleImgCnt();
 }
@@ -82,7 +78,7 @@ const createSlider = () => {
   `;
 
   sliderContainer.appendChild(prevNext);  
-  // hide image aria
+  // hide image area
   imagesArea.style.display = 'none';  
   document.querySelector('.main').style.display = 'block';
   sliders.forEach(slide => {
@@ -91,7 +87,6 @@ const createSlider = () => {
     item.innerHTML = `<img class="w-100"
     src="${slide}"
     alt="">`;
-    console.log(slide);
     sliderContainer.appendChild(item);
   })  
   changeSlide(0);
